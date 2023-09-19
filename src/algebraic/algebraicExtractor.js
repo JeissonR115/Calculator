@@ -10,15 +10,12 @@ const extractCoefficient = (termStr = "") =>  {
 
     if (matcher) {
         const firstMatch = matcher[0];
-        try {
-            coefficient =  parseFloat(firstMatch)?parseFloat(firstMatch):1;
-        } catch (e) {
-            coefficient = firstMatch.charAt(0) === '-' ? -1 : 1;
-        }
+        console.log(firstMatch)
+        coefficient =  !isNaN(parseFloat(firstMatch)) ?parseFloat(firstMatch):firstMatch.charAt(0) === '-' ? -1 : 1;
     }
     return coefficient;
 }
-const extractLiteralPart = (termStr = "") => {
+const extractLiteralPart = (termStr = "",id = "") => {
     const variableList = [new Variable()];
     const regex = /([a-zA-Z])(\^([-+]?\d*\.?\d+))?/g;
     // ([a-zA-Z]): Encuentra una letra.
@@ -35,9 +32,9 @@ const extractLiteralPart = (termStr = "") => {
     }
     return variableList;
 }
-const extractTerm = (termSrc = "") => {
-    const coefficient = extractCoefficient(termSrc);
-    const literalPart = extractLiteralPart(termSrc);
+const extractTerm = (termStr = "") => {
+    const coefficient = extractCoefficient(termStr);
+    const literalPart = extractLiteralPart(termStr);
 
     return new Term(coefficient,literalPart)
 }

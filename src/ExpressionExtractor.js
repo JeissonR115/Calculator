@@ -1,12 +1,12 @@
 import {extractAlgebraicExpression} from "./algebraic/algebraicExtractor.js";
 
-const expressionExtractor = (expressionSrc = '',typeExpression = '') =>{
+const expressionExtractor = (expressionStr = '',typeExpression = '') =>{
     let expression;
     switch (typeExpression) {
         case "arithmetic":
             break;
         case "algebraic":
-            expression = extractAlgebraicExpression(expressionSrc)
+            expression = extractAlgebraicExpression(expressionStr)
             break;
         default:
             expression = 0;

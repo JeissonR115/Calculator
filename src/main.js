@@ -1,7 +1,20 @@
 import {extractAlgebraicExpression} from "./algebraic/algebraicExtractor.js";
+import {
+    printCoefficient,
+    printLiteralPart,
+    printPolynomial,
+    printPolynomials,
+    printTerm
+} from "./algebraic/algebraicPrinter.js";
 
-console.log(extractAlgebraicExpression("(-2x^2z^5 +10-12)()(2x)"))
-console.log(extractAlgebraicExpression("ds()()"))
-const a = extractAlgebraicExpression("");
-console.log(a)
-console.log(extractAlgebraicExpression("-3"))
+const calculatorInput = document.querySelector(".calculator__input");
+const calculatorButton = document.querySelector(".calculator__button");
+const output =document.querySelector(".calculator__output");
+calculatorButton.addEventListener("click",() => {
+    output.innerHTML = "";
+    const expression = calculatorInput.value;
+    const polynomials = extractAlgebraicExpression(expression);
+    output.append(printPolynomials(polynomials,"listPolynomial  "))
+})
+
+
