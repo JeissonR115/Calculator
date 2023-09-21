@@ -97,3 +97,17 @@ export  const printPolynomials = (polynomials = [new Polynomial()],id = '') => {
     });
     return polynomialsElement;
 }
+
+export const printExpression = (expression,id = "") => {
+    if (Array.isArray(expression)) {
+        return printPolynomials(expression,id);
+    } else if (expression instanceof Polynomial) {
+        return printPolynomial(expression,id);
+    } else if (expression instanceof Term) {
+        return printTerm(expression,id);
+    } else {
+        const messageError = document.createElement("span");
+        messageError.textContent = "Lo Siento pero no pude reconocer la expression que acabas de escribir";
+        return messageError;
+    }
+}
