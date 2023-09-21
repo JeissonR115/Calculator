@@ -1,11 +1,14 @@
 import {Polynomial, Term, Variable} from "./algebraicElements.js";
 const extractCoefficient = (termStr = "") =>  {
+    // Eliminar paréntesis y espacios
+    const readyTermStr = termStr.replace(/[()\s]/g, '')
+
     const regex = /((?<=^|[-+])[-+]?(?:\d*\.\d+|\d+)|[-+]?[a-zA-Z])/;
     // (?< =^|[-+]): Busca números al principio o después de los signos
     // [-+]?: Permite un signo opcional antes del número
     // \d+: Encuentra los dígitos
     // ([a-zA-Z]): Encuentra una letra.
-    const matcher = termStr.replace(/\s/g, '').match(regex);
+    const matcher = readyTermStr.replace(/\s/g, '').match(regex);
     let coefficient = 0;
 
     if (matcher) {
@@ -37,7 +40,7 @@ const extractTerm = (termStr = "") => {
 
     return new Term(coefficient,literalPart)
 }
-const extractPolynomial = (polynomialStr = "") => {
+export const extractPolynomial = (polynomialStr = "") => {
     const termList = [new Term()];
     const regex = /(?=[+-])/;
     const termStrArray = polynomialStr.split(regex);
