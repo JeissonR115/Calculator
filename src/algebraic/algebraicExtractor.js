@@ -14,7 +14,7 @@ const extractCoefficient = (termStr = "") =>  {
     }
     return coefficient;
 }
-const extractLiteralPart = (termStr = "",id = "") => {
+const extractLiteralPart = (termStr = "") => {
     const variableList = [new Variable()];
     const regex = /([a-zA-Z])(\^([-+]?\d*\.?\d+))?/g;
     // ([a-zA-Z]): Encuentra una letra.
