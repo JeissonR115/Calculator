@@ -10,7 +10,6 @@ const extractCoefficient = (termStr = "") =>  {
 
     if (matcher) {
         const firstMatch = matcher[0];
-        console.log(firstMatch)
         coefficient =  !isNaN(parseFloat(firstMatch)) ?parseFloat(firstMatch):firstMatch.charAt(0) === '-' ? -1 : 1;
     }
     return coefficient;

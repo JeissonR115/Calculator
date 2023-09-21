@@ -53,7 +53,6 @@ export  const printTerm = (term = new Term(),id = "") =>{
     const termElement = document.createElement("span");
     termElement.className = "polynomial__term";
     termElement.id = id;
-    console.log(term.literalPart.length,"<-- cantidad de vars",term.literalPart.length <= 1)
     if (term.coefficient !== 0) {
         if (term.coefficient !== 1 || term.literalPart.length < 1) {
             termElement.append(printCoefficient(term.coefficient,id+"__coefficient"));
@@ -76,7 +75,6 @@ export  const printPolynomial = (polynomial = new polynomial(),id = "")=>{
     const polynomialElement = document.createElement("span")
     polynomialElement.className = "polynomial";
     polynomialElement.id= id;
-    console.log("el id de polinonial es =",id)
     polynomial.termList.forEach((term,i) => {
         const newTerm = new Term(term.coefficient<0?term.coefficient * -1:term.coefficient,term.literalPart)
         polynomialElement.append(
