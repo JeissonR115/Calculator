@@ -1,11 +1,5 @@
 import {extractAlgebraicExpression} from "./algebraic/algebraicExtractor.js";
-import {
-    printCoefficient,
-    printLiteralPart,
-    printPolynomial,
-    printPolynomials,
-    printTerm
-} from "./algebraic/algebraicPrinter.js";
+import {printPolynomials} from "./algebraic/algebraicPrinter.js";
 
 const calculatorInput = document.querySelector(".calculator__input");
 const calculatorButton = document.querySelector(".calculator__button");
