@@ -1,5 +1,6 @@
-import {Polynomial, Term} from "./algebraicElements.js";
-
+import {Polynomial} from "./elements/Polynomial.js";
+import {Term} from "./elements/Term.js";
+import {Variable} from "./elements/Variable.js";
 export const AlgebraicCalculator = {
     summer(polynomial = new Polynomial()) {
         const simplifiedTerms = [new Term()];

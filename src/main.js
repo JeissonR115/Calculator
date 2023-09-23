@@ -1,7 +1,7 @@
 import {extractAlgebraicExpression} from "./algebraic/algebraicExtractor.js";
 import {printExpression} from "./algebraic/algebraicPrinter.js";
 import {AlgebraicCalculator} from "./algebraic/algebraicCalculator.js";
-import {Polynomial, Term, Variable} from "./algebraic/algebraicElements.js";
+
 
 const calculatorInput = document.querySelector(".calculator__input");
 const calculatorButton = document.querySelector(".calculator__button");

@@ -1,5 +1,6 @@
-import {Polynomial, Term, Variable} from "./algebraicElements.js";
-
+import {Polynomial} from "./elements/Polynomial.js";
+import {Term} from "./elements/Term.js";
+import {Variable} from "./elements/Variable.js";
 export const printCoefficient = (coefficient = 0,id ="")=>{
     const coefficientElement = document.createElement("span")
     coefficientElement.className = "term__coefficient";
