@@ -4,13 +4,15 @@ import {AlgebraicCalculator} from "./algebraic/algebraicCalculator.js";
 const radioInputList = document.querySelectorAll(".input-radio")
 const calculatorInput = document.querySelector(".calculator__input");
 const output =document.querySelector(".calculator__output");
+const radioInputDefault = document.querySelector('#default-radio')
 calculatorInput.addEventListener("input",() => {
     output.innerHTML = "";
     const expression = calculatorInput.value;
     const polynomials = extractAlgebraicExpression(expression);
     const sum = AlgebraicCalculator.summer(polynomials);
-    //output.append(printExpression(sum,"listPolynomial  "))
-    output.append(printExpression(polynomials.derive(),"listPolynomial  "))
+    radioInputDefault.checked = true;
+    output.append(printExpression(sum,"listPolynomial  "))
+    //output.append(printExpression(polynomials.derive(),"listPolynomial  "))
 })
 
 radioInputList.forEach(radioInput =>{
@@ -24,7 +26,7 @@ radioInputList.forEach(radioInput =>{
                 element =printExpression(polynomial.derive(),"derive-term")
                 break;
             case "integral-radio":
-                element= printExpression(polynomial,'integral-term')
+                element= printExpression(polynomial.integrate(),'integral-term')
                 break;
             case "default-radio":
                 element= printExpression(polynomial,'term')

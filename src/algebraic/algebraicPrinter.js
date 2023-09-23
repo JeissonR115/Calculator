@@ -10,7 +10,7 @@ export const printCoefficient = (coefficient = new Fraction(),id ="")=>{
         if( coefficient.denominator === 1){
             coefficientElement.textContent = coefficient.num().toString();
         }else {
-            coefficientElement.textContent = `${coefficient.numerator}/6${coefficient.denominator}`
+            coefficientElement.textContent = `(${coefficient.numerator}/${coefficient.denominator})`
         }
     }
     return coefficientElement
