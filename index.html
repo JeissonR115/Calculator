@@ -9,11 +9,25 @@
 <main>
     <div class="calculator">
         <h2 class="calculator__title">Calculadora</h2>
+        <ul class="calculator__input-radio-list">
+            <li class="input-radio-list__item">
+                <input type="radio" name="calculator__input-list" class="input-radio" id="default-radio">
+                <label for="default-radio">Default</label>
+            </li>
+            <li class="input-radio-list__item">
+                <input type="radio" name="calculator__input-list"  class="input-radio" id="derivative-radio">
+                <label for="derivative-radio">Derivar</label>
+            </li>
+            <li class="input-radio-list__item">
+                <input type="radio" name="calculator__input-list"  class="input-radio" id="integral-radio">
+                <label for="integral-radio">Integrar</label>
+            </li>
+        </ul>
         <label class="calculator__label">
-            <span class="calculator__text"></span>
+            <span class="calculator__text">Escribe la expression:</span>
             <input class="calculator__input" type="text" name="expression" id="" placeholder="x^2">
         </label>
-        <input class="calculator__button" type="button" value="Calcular">
+
         <div class="calculator__output">
             0
         </div>
