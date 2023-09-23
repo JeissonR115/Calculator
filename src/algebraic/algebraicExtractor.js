@@ -40,7 +40,7 @@ const extractTerm = (termStr = "") => {
 
     return new Term(coefficient,literalPart)
 }
-const extractPolynomial = (polynomialStr = "") => {
+export const extractPolynomial = (polynomialStr = "") => {
     const termList = [new Term()];
     const regex = /(?=[+-])/;
     const termStrArray = polynomialStr.split(regex);
