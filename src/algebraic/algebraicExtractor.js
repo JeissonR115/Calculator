@@ -1,6 +1,7 @@
 import {Polynomial} from "./elements/Polynomial.js";
 import {Term} from "./elements/Term.js";
 import {Variable} from "./elements/Variable.js";
+import {Fraction} from "../arithmetic/Fraction.js";
 
 const extractCoefficient = (termStr = "") =>  {
     // Eliminar paréntesis y espacios
@@ -12,12 +13,15 @@ const extractCoefficient = (termStr = "") =>  {
     // \d+: Encuentra los dígitos
     // ([a-zA-Z]): Encuentra una letra.
     const matcher = readyTermStr.replace(/\s/g, '').match(regex);
-    let coefficient = 0;
+    let coefficient = new Fraction( );
 
     if (matcher) {
         const firstMatch = matcher[0];
-        coefficient =  !isNaN(parseFloat(firstMatch)) ?parseFloat(firstMatch):firstMatch.charAt(0) === '-' ? -1 : 1;
+        coefficient.numerator = !isNaN(parseFloat(firstMatch))
+            ?parseFloat(firstMatch)
+            :firstMatch.charAt(0) === '-' ? -1 : 1;
     }
+    console.log(coefficient)
     return coefficient;
 }
 const extractLiteralPart = (termStr = "") => {

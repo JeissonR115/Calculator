@@ -1,11 +1,18 @@
 import {Polynomial} from "./elements/Polynomial.js";
 import {Term} from "./elements/Term.js";
 import {Variable} from "./elements/Variable.js";
-export const printCoefficient = (coefficient = 0,id ="")=>{
+import {Fraction} from "../arithmetic/Fraction.js";
+export const printCoefficient = (coefficient = new Fraction(),id ="")=>{
     const coefficientElement = document.createElement("span")
     coefficientElement.className = "term__coefficient";
     coefficientElement.id = id;
-    coefficientElement.textContent = coefficient.toString();
+    if (coefficient.num() !== 1 ){
+        if( coefficient.denominator === 1){
+            coefficientElement.textContent = coefficient.num().toString();
+        }else {
+            coefficientElement.textContent = `${coefficient.numerator}/6${coefficient.denominator}`
+        }
+    }
     return coefficientElement
 }
 const printVariable = (variable = new Variable(),id = "") => {
@@ -54,8 +61,8 @@ export  const printTerm = (term = new Term(),id = "") =>{
     const termElement = document.createElement("span");
     termElement.className = "polynomial__term";
     termElement.id = id;
-    if (term.coefficient !== 0) {
-        if (term.coefficient !== 1 || term.literalPart.length < 1) {
+    if (term.coefficient.num !== 0) {
+        if (term.coefficient.num !== 1 || term.literalPart.length < 1) {
             termElement.append(printCoefficient(term.coefficient,id+"__coefficient"));
         }
         const literalPartElement = printLiteralPart(term.literalPart,id +"__literalPart");
@@ -77,9 +84,11 @@ export  const printPolynomial = (polynomial = new polynomial(),id = "")=>{
     polynomialElement.className = "polynomial";
     polynomialElement.id= id;
     polynomial.termList.forEach((term,i) => {
-        const newTerm = new Term(term.coefficient<0?term.coefficient * -1:term.coefficient,term.literalPart)
+        const newTerm = new Term(term.coefficient.num < 0
+            ?new Fraction(term.coefficient.num * -1):term.coefficient
+            ,term.literalPart)
         polynomialElement.append(
-            (i === 0) ?"": (term.coefficient <0) ?" - ":" + ",
+            (i === 0) ?"": (term.coefficient.num <0) ?" - ":" + ",
             printTerm(newTerm,id+"__term--"+i)
         )
     });
