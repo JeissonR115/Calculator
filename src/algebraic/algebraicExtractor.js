@@ -21,7 +21,6 @@ const extractCoefficient = (termStr = "") =>  {
             ?parseFloat(firstMatch)
             :firstMatch.charAt(0) === '-' ? -1 : 1;
     }
-    console.log(coefficient)
     return coefficient;
 }
 const extractLiteralPart = (termStr = "") => {
@@ -36,7 +35,19 @@ const extractLiteralPart = (termStr = "") => {
             const letter = match[1];
             const exponentStr = match[3];
             const exponent = exponentStr !== undefined ? parseFloat(exponentStr) : 1;
-            variableList.push(new Variable(letter, exponent));
+
+            let found = false;
+            for (const variable of variableList) {
+                if (variable.letter === letter) {
+                    variable.exponent += exponent; // Sumar al exponente existente
+                    found = true;
+                    break;
+                }
+            }
+            // Si la letra no se encontró en variableList, agregarla
+            if (!found) {
+                variableList.push(new Variable(letter, exponent));
+            }
         }
     }
     return variableList;
