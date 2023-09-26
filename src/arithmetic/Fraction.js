@@ -27,7 +27,7 @@ export class Fraction {
         resultado.denominator = lcm;
         return resultado;
     }
-    product(other = new Fraction()) {
+    multiply(other = new Fraction()) {
         return new Fraction(this.numerator * other.numerator, this.denominator * other.denominator);
     }
     quotient(other = new Fraction()) {

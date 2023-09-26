@@ -4,35 +4,48 @@ import {AlgebraicCalculator} from "./algebraic/algebraicCalculator.js";
 const radioInputList = document.querySelectorAll(".input-radio")
 const calculatorInput = document.querySelector(".calculator__input");
 const output =document.querySelector(".calculator__output");
-const radioInputDefault = document.querySelector('#default-radio')
-calculatorInput.addEventListener("input",() => {
-    output.innerHTML = "";
-    const expression = calculatorInput.value;
+const defaultMode = document.querySelector("#default-radio")
+let mode = "normal";
+let element;
+defaultMode.checked = true;
+calculatorInput.value = ''
+const showExpression = (outputElement,inputElement) =>{
+    outputElement.innerHTML = "";
+    const expression = inputElement.value;
     const polynomials = extractAlgebraicExpression(expression);
-    const sum = AlgebraicCalculator.summer(polynomials);
-    radioInputDefault.checked = true;
-    output.append(printExpression(sum,"listPolynomial  "))
-    //output.append(printExpression(polynomials.derive(),"listPolynomial  "))
-})
+    switch (mode) {
+        case "normal":
+            element = printExpression(AlgebraicCalculator.summer(polynomials),"term")
+            break;
+        case "derivative":
+            element = printExpression(AlgebraicCalculator.summer(polynomials.derive()),"derive-term")
+            break;
+        case "integral":
+            element= printExpression(AlgebraicCalculator.summer(polynomials.integrate()),"integral-term");
+            break;
+        default:
+            element= document.createElement("p");
+            element.textContent = 'error no se que esta pasando'
 
+    }
+    outputElement.append(element)
+}
+calculatorInput.addEventListener("input",() => showExpression(output,calculatorInput))
 radioInputList.forEach(radioInput =>{
     radioInput.addEventListener("click",()=>{
-        output.innerHTML = "";
-        const expression = calculatorInput.value;
-        const polynomial = extractAlgebraicExpression(expression);
-        let element;
         switch (radioInput.id){
             case "derivative-radio":
-                element =printExpression(polynomial.derive(),"derive-term")
+                mode = "derivative"
+                // element =printExpression(polynomial.derive(),"derive-term")
                 break;
             case "integral-radio":
-                element= printExpression(polynomial.integrate(),'integral-term')
+                mode = "integral"
                 break;
             case "default-radio":
-                element= printExpression(polynomial,'term')
+                mode = "normal"
                 break
             default:console.log("error")
         }
-        output.append(element)
+        showExpression(output,calculatorInput)
     })
 })

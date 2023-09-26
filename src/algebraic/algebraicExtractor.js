@@ -36,21 +36,10 @@ const extractLiteralPart = (termStr = "") => {
             const exponentStr = match[3];
             const exponent = exponentStr !== undefined ? parseFloat(exponentStr) : 1;
 
-            let found = false;
-            for (const variable of variableList) {
-                if (variable.letter === letter) {
-                    variable.exponent += exponent; // Sumar al exponente existente
-                    found = true;
-                    break;
-                }
+            variableList.push(new Variable(letter, exponent));
             }
-            // Si la letra no se encontró en variableList, agregarla
-            if (!found) {
-                variableList.push(new Variable(letter, exponent));
-            }
-        }
     }
-    return variableList;
+    return Term.simplifyLiteralPart(variableList)
 }
 const extractTerm = (termStr = "") => {
     const coefficient = extractCoefficient(termStr);

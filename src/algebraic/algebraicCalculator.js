@@ -22,6 +22,40 @@ export const AlgebraicCalculator = {
         }
         return polynomial;
     },
-}
+    multiply(polynomials =[ new Polynomial()]){
+        if(polynomials instanceof Term){
+            return polynomials
+        }
+        if (polynomials instanceof Polynomial){
+            return this.summer(polynomials);
+        }
+        if (polynomials.length === 0) {
+            return new Polynomial([new Term(new Fraction(1))]);
+        }
 
+        let result = polynomials[0];// Inicializar con el primer polinomio.
+        for (let i = 1; i < polynomials.length; i++) {
+            result = multiplyTwoPolynomials(result, polynomials[i]);
+        }
+        return this.summer(result);
+    }
+}
+const multiplyTwoPolynomials = (polynomialA, polynomialB) => {
+    const termListA = polynomialA.termList;
+    const termListB = polynomialB.termList;
+
+    const resultTermList = [];
+
+    for (const termA of termListA) {
+        for (const termB of termListB) {
+            // Multiplica cada par de términos y agrega el resultado a la lista de términos del resultado.
+            const coefficient = termA.coefficient.multiply(termB.coefficient);
+            const variableList = Term.simplifyLiteralPart([...termA.literalPart, ...termB.literalPart]);
+            resultTermList.push(new Term(coefficient,variableList ));
+        }
+    }
+    // Crea un nuevo polinomio a partir de la lista de términos resultantes
+    const product =  new Polynomial(resultTermList);
+    return AlgebraicCalculator.summer(product);
+}
 

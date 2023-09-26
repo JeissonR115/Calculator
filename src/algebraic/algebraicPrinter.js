@@ -85,7 +85,7 @@ export  const printPolynomial = (polynomial = new polynomial(),id = "")=>{
     polynomialElement.id= id;
     polynomial.termList.forEach((term,i) => {
         const newTerm = new Term(term.coefficient.num < 0
-            ?new Fraction(term.coefficient.num * -1):term.coefficient
+            ? new Fraction(term.coefficient.num * -1):term.coefficient
             ,term.literalPart)
         polynomialElement.append(
             (i === 0) ?"": (term.coefficient.num <0) ?" - ":" + ",

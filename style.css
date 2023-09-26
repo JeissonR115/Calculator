@@ -1,3 +1,75 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+ul,li{
+    list-style: none;
+}
 body{
-    background: rebeccapurple;
+    background: #0d171e;
+    color: #70abd7;
+    font-family: 'Inter Tight', sans-serif;
+}
+.calculator{
+    max-width: 500px;
+    min-width: 200px;
+    width: 50%;
+    min-height: 250px;
+
+    margin: 100px auto;
+    padding: 20px 10px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    border-radius: 20px;
+    color:#0d171e;
+    background: #70abd7;
+}
+.calculator__title{
+    font-weight: bold;
+    font-size: 30px;
+}
+.calculator__title,.calculator__output{
+    width: 100%;
+    text-align: center;
+}
+.calculator__input-radio-list, .calculator__label{
+    min-width: 180px;
+    width: 50%;
+    margin: auto;
+
+    text-align: center;
+}
+.input-radio-list__item, .calculator__input{
+    margin: 5px;
+}
+.calculator__input{
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+}
+.calculator__text{
+     color: #3d506e;
+ }
+.polynomial{
+    color: #9d3030;
+    font-weight: bold;
+    font-family: 'Victor Mono', monospace;
+}
+
+.polynomial__term{
+    color: #0d171e;
+    font-weight: normal;
+}
+
+.term__literalPart{
+    color: #004bbe;
+}
+.variable__exponent{
+    color: #246767;
+    font-weight: bold;
 }
