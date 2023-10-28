@@ -1,6 +1,7 @@
 import {Polynomial} from "./elements/Polynomial.js";
 import {Term} from "./elements/Term.js";
 import {Fraction} from "../arithmetic/Fraction.js";
+
 export const AlgebraicCalculator = {
     summer(polynomial = new Polynomial()) {
         const simplifiedTerms = [new Term()];
@@ -20,42 +21,29 @@ export const AlgebraicCalculator = {
             // Devolvemos un nuevo polinomio construido a partir de los valores de simplifiedTerms
             return new Polynomial(Object.values(simplifiedTerms));
         }
+        if(Array.isArray(polynomial)){
+            polynomial.map(poly => this.summer(poly))
+        }
         return polynomial;
     },
     multiply(polynomials =[ new Polynomial()]){
-        if(polynomials instanceof Term){
-            return polynomials
-        }
+        let result;
         if (polynomials instanceof Polynomial){
-            return this.summer(polynomials);
+           result = polynomials;
         }
-        if (polynomials.length === 0) {
-            return new Polynomial([new Term(new Fraction(1))]);
+        if(Array.isArray(polynomials)){
+            result = polynomials[0]
+            for (let i = 1; i < polynomials.length; i++) {
+                const resultTermList = [];
+                for (const termA of  result.termList) {
+                    for (const termB of polynomials[i].termList) {
+                        const newTerm  = termA.multiply(termB)
+                        resultTermList.push(newTerm);
+                    }
+                }
+                result = new Polynomial(resultTermList);
+            }
         }
-
-        let result = polynomials[0];// Inicializar con el primer polinomio.
-        for (let i = 1; i < polynomials.length; i++) {
-            result = multiplyTwoPolynomials(result, polynomials[i]);
-        }
-        return this.summer(result);
+        return result;
     }
 }
-const multiplyTwoPolynomials = (polynomialA, polynomialB) => {
-    const termListA = polynomialA.termList;
-    const termListB = polynomialB.termList;
-
-    const resultTermList = [];
-
-    for (const termA of termListA) {
-        for (const termB of termListB) {
-            // Multiplica cada par de términos y agrega el resultado a la lista de términos del resultado.
-            const coefficient = termA.coefficient.multiply(termB.coefficient);
-            const variableList = Term.simplifyLiteralPart([...termA.literalPart, ...termB.literalPart]);
-            resultTermList.push(new Term(coefficient,variableList ));
-        }
-    }
-    // Crea un nuevo polinomio a partir de la lista de términos resultantes
-    const product =  new Polynomial(resultTermList);
-    return AlgebraicCalculator.summer(product);
-}
-

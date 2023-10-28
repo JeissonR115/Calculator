@@ -18,7 +18,7 @@ const showExpression = (outputElement,inputElement) =>{
             element = printExpression(AlgebraicCalculator.summer(polynomials),"term")
             break;
         case "derivative":
-            element = printExpression(AlgebraicCalculator.summer(polynomials.derive()),"derive-term")
+            element = printExpression(polynomials[0].summer(polynomials[1]),"derive-term")
             break;
         case "integral":
             element= printExpression(AlgebraicCalculator.summer(polynomials.integrate()),"integral-term");
